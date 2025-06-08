@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Booking | Chill Ola Luxury Homes & Apartment</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="header-container">
+    <div class="logo">
+      <span>CHILL OLA</span>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="booking.html" class="active">Booking</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <!-- HERO WITH BOOKING FORM OVERLAY -->
+  <section class="booking-hero">
+    <img src="image%20(25).jpeg" alt="Chill Ola Room" class="booking-bg">
+    <form class="booking-form" id="bookingForm" autocomplete="off">
+      <h2>Book Your Stay</h2>
+      <label>Full Name<br><input type="text" id="name" required></label>
+      <label>Phone Number<br><input type="tel" id="phone" required></label>
+      <label>Email Address<br><input type="email" id="email" required></label>
+      <label>Check-in Date<br><input type="date" id="checkin_date" required></label>
+      <label>Check-out Date<br><input type="date" id="checkout_date" required></label>
+      <label>Room Type<br>
+        <select id="room_type" required>
+          <option>Full Duplex (₦120,000–₦130,000 per day)</option>
+          <option>Single Room (₦45,000–₦60,000 per day)</option>
+        </select>
+      </label>
+      <label>Number of Guests<br><input type="number" id="guests" min="1" max="10" required></label>
+      <button type="submit">Book Now</button>
+    </form>
+
+  </section>
+  <!-- FAQ BELOW -->
+  <section class="booking-faq">
+    <h3>Frequently Asked Questions</h3>
+    <ul>
+      <li><b>Check-in:</b> Rooms are available from 2:00 pm on the day of arrival.</li>
+      <li><b>Check-out:</b> Kindly check out by 11:30 am on your departure day.</li>
+      <li><b>Cancellation Policy:</b> Bookings may be canceled free of charge up to 48 hours before arrival.</li>
+      <li><b>Environmental Care:</b> We are committed to sustainability—recycling, energy-efficient appliances, and mindful water use. Please help us conserve resources by reusing towels when possible.</li>
+      <li><b>Laundry Service:</b> Laundry is available on request with a 48-hour turnaround. Please contact reception for details and pricing.</li>
+      <li><b>Reception:</b> Our team is available 24/7. Should you need an extra blanket or pillow, or have any requests, we are always happy to assist.</li>
+      <li><b>Safety:</b> Please keep valuables secured, do not leave personal belongings unattended in public areas, and retain your room key at all times.</li>
+      <li><b>Non-Smoking Policy:</b> Chill Ola is a smoke-free facility. A ₦1,000,000 fee applies for violations, in addition to legal proceedings as necessary.</li>
+    </ul>
+
+  </section>
+
+  <div style="margin-top:38px; text-align:center;">
+    <button id="adminAccessBtn"
+            style="background:#8b001b; color:#fff; border:none; border-radius:8px; padding:12px 30px; font-size:1.09em; font-family:inherit; font-weight:600; cursor:pointer; box-shadow:0 4px 16px #8b001b14;">
+      See All Bookings (Admin Only)
+    </button>
+  </div>
+
+</main>
+<div class="welcome-animated" id="welcomeAnimated">
+  <img src="animated.png" alt="Welcome Character" />
+</div>
+<div id="chatModal" class="chat-modal">
+  <div class="chat-header">
+    <span>Ask Chill Ola</span>
+
+    <button id="closeChatBtn">&times;</button>
+  </div>
+  <div class="chat-body" id="chatBody"></div>
+</div>
+<script src="script.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var adminBtn = document.getElementById('adminAccessBtn');
+    if (adminBtn) {
+      adminBtn.onclick = function () {
+        const pw = prompt('Enter admin password:');
+        if (pw === 'chillola2024') {
+          window.location.href = 'admin.html';
+        } else if (pw !== null) {
+          alert('Incorrect password. Access denied.');
+        }
+      };
+    }
+  });
+</script>
+</body>
+</html>

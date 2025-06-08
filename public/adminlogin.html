@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin Login | Chill Ola</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div style="max-width:340px; margin:80px auto; background:#fff; padding:32px; border-radius:15px; box-shadow:0 6px 32px #8b001b13;">
+  <h2 style="color:#8b001b;">Admin Login</h2>
+  <form id="adminLoginForm" autocomplete="off">
+    <label>Username<br><input type="text" id="adminUsername" required style="width:100%;padding:7px;border-radius:7px;margin-bottom:13px;"></label>
+    <label>Password<br><input type="password" id="adminPassword" required style="width:100%;padding:7px;border-radius:7px;margin-bottom:17px;"></label>
+    <button type="submit" style="background:#8b001b;color:#fff;padding:10px 0;width:100%;border-radius:7px;">Login</button>
+  </form>
+  <div id="loginError" style="color:#a91e42; margin-top:12px;display:none;"></div>
+</div>
+<script>
+  document.getElementById('adminLoginForm').onsubmit = async function(e) {
+    e.preventDefault();
+    const username = document.getElementById('adminUsername').value;
+    const password = document.getElementById('adminPassword').value;
+    const res = await fetch('http://localhost:3001/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+    const data = await res.json();
+    if (data.token) {
+      // Save token to localStorage/sessionStorage
+      localStorage.setItem('adminToken', data.token);
+      window.location.href = 'admin.html';
+    } else {
+      document.getElementById('loginError').textContent = data.message;
+      document.getElementById('loginError').style.display = 'block';
+    }
+  }
+</script>
+</body>
+</html>

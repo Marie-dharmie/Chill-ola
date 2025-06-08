@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking Confirmed | Chill Ola Luxury Homes & Apartment</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Booking confirmation animation */
+        .confirmation-section {
+            text-align: center;
+            padding: 80px 10vw;
+            animation: fadeInUp 0.8s cubic-bezier(.21,1.07,.54,.91);
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px);}
+            to   { opacity: 1; transform: translateY(0);}
+        }
+        .checkmark-circle {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            background: #eafcef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 28px auto;
+            animation: popIn 0.6s cubic-bezier(.5,1.64,.37,.99);
+        }
+        @keyframes popIn {
+            from { transform: scale(0.7); opacity:0; }
+            to   { transform: scale(1); opacity:1;}
+        }
+        .checkmark {
+            width: 54px;
+            height: 54px;
+            display: block;
+        }
+        .checkmark path {
+            stroke: #1eb94e;
+            stroke-width: 5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+            stroke-dasharray: 60;
+            stroke-dashoffset: 60;
+            animation: drawCheck 0.8s 0.2s forwards cubic-bezier(.28,1.18,.43,.99);
+        }
+        @keyframes drawCheck {
+            to { stroke-dashoffset: 0; }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="header-container">
+        <div class="logo"><span>CHILL OLA</span></div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="booking.html" class="active">Booking</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </div>
+</header>
+<main>
+    <section class="confirmation-section">
+        <div class="checkmark-circle">
+            <svg class="checkmark" viewBox="0 0 52 52">
+                <path d="M14 28 L23 37 L39 18" />
+            </svg>
+        </div>
+        <h2 style="color:#8b001b; font-size:2.4em; margin-bottom: 14px;">Booking Confirmed!</h2>
+        <p style="font-size:1.19em; max-width:650px; margin:0 auto 36px auto;">
+            Thank you for booking your stay at Chill Ola Royal Luxury Homes & Apartment.<br>
+            We’ve received your reservation and will contact you shortly to confirm your details.<br>
+            For urgent requests, please call or WhatsApp <b>+234-707-797-9710</b>.
+        </p>
+        <a href="index.html" style="display:inline-block; background:#8b001b; color:#fff; font-size:1.1em; border-radius:11px; padding:14px 34px; text-decoration:none; font-weight:600; margin-top:24px;">Back to Home</a>
+    </section>
+</main>
+<div class="welcome-animated" id="welcomeAnimated">
+    <img src="animated.png" alt="Welcome Character" />
+</div>
+<div id="chatModal" class="chat-modal">
+    <div class="chat-header">
+        <span>Ask Chill Ola</span>
+        <button id="closeChatBtn">&times;</button>
+    </div>
+    <div class="chat-body" id="chatBody"></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

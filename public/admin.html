@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard | Chill Ola Luxury Homes & Apartment</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { background: #faf6f9; }
+    .admin-dashboard {
+      max-width: 1150px;
+      margin: 50px auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(139,0,27,0.09);
+      padding: 40px 24px;
+    }
+    .logout-btn {
+      margin-top:30px;
+      background:#eee;
+      color:#8b001b;
+      padding:8px 22px;
+      border-radius:9px;
+      border:none;
+      font-weight:600;
+      cursor:pointer;
+    }
+    h2 { color: #8b001b; }
+    h3 {
+      margin-top:38px;
+      color:#8b001b;
+      font-size: 1.4em;
+    }
+    table {
+      width: 100%;
+      min-width: 950px;
+      border-collapse: collapse;
+      margin-top: 18px;
+    }
+    th, td {
+      padding: 11px 9px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+      font-family: inherit;
+    }
+    th {
+      background: #8b001b;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.13em;
+      letter-spacing: 0.01em;
+    }
+    th.small {
+      color: #fff;    /* Header "Booked On" is white */
+      background: #8b001b; /* keep the background same as others */
+    }
+    td.small {
+      color: #222 !important; /* The data (dates) is black, and !important makes sure it overrides */
+      background: inherit;
+    }
+
+    tr:nth-child(even) { background: #faf6f9; }
+    @media (max-width: 900px) {
+      table, .admin-dashboard { min-width: 100vw !important; }
+    }
+    .login-box {
+      max-width: 500px;
+      margin: 120px auto 0 auto;
+      background: linear-gradient(135deg,#fff 80%, #f7e3ed 100%);
+      border-radius: 24px;
+      box-shadow: 0 16px 40px rgba(139,0,27,0.13);
+      padding: 48px 34px 36px 34px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .login-title {
+      font-size: 2em;
+      font-weight: 700;
+      color: #8b001b;
+      margin-bottom: 28px;
+      text-align: center;
+      letter-spacing: 0.04em;
+    }
+    .login-box label { font-size: 1.18em; color: #8b001b; font-weight: 600; margin-bottom: 7px; }
+    .login-box input {
+      width: 100%;
+      padding: 15px;
+      border-radius: 11px;
+      border: 1.5px solid #ddd;
+      font-size: 1.3em;
+      margin-bottom: 22px;
+      background: #faf6f9;
+      transition: box-shadow 0.18s, border-color 0.16s;
+    }
+    .login-box input:focus {
+      outline: none;
+      border-color: #8b001b;
+      box-shadow: 0 0 10px #8b001b20;
+    }
+    .login-box button {
+      background: #8b001b;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 14px 0;
+      font-size: 1.23em;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 7px;
+      transition: background 0.18s, transform 0.13s;
+      box-shadow: 0 4px 14px rgba(139,0,27,0.07);
+    }
+    .login-box button:hover { background: #a91e42; transform: scale(1.04);}
+    .login-error { color: #b40022; font-size: 1.10em; text-align:center; min-height:28px;}
+    @media (max-width:600px) {
+      .login-box { max-width: 97vw; padding: 18vw 4vw 8vw 4vw;}
+      .login-title { font-size: 1.4em;}
+    }
+  </style>
+</head>
+<body>
+<!-- NAVBAR (optional: remove if you don't want navigation on login) -->
+<header>
+  <div class="header-container">
+    <div class="logo">
+      <span>CHILL OLA</span>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="booking.html">Booking</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<div id="loginSection" class="login-box">
+  <div class="login-title">Admin Login</div>
+  <label for="adminUsername">Username:</label>
+  <input type="text" id="adminUsername" placeholder="Enter username" autocomplete="off">
+  <label for="adminPassword">Password:</label>
+  <input type="password" id="adminPassword" placeholder="Enter password" autocomplete="off">
+  <button onclick="adminLogin()">Login</button>
+  <div id="loginError" class="login-error"></div>
+</div>
+
+<div id="dashboardSection" style="display:none;">
+  <div class="admin-dashboard">
+    <h2>All Bookings (by Month)</h2>
+    <div id="bookingsByMonth"></div>
+    <button onclick="logout()" class="logout-btn">Logout</button>
+  </div>
+</div>
+<script>
+  // --- Secure Admin Login via Backend (JWT) ---
+  function adminLogin() {
+    const username = document.getElementById('adminUsername').value.trim();
+    const password = document.getElementById('adminPassword').value.trim();
+    const errorDiv = document.getElementById('loginError');
+    errorDiv.textContent = "";
+    fetch('http://localhost:3001/api/admin/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ username, password })
+    })
+            .then(res => res.json())
+            .then(res => {
+              if (res.token) {
+                localStorage.setItem('chillola_admin_token', res.token);
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('dashboardSection').style.display = 'block';
+                loadBookings();
+              } else {
+                errorDiv.textContent = res.message || "Login failed. Try again.";
+              }
+            })
+            .catch(() => errorDiv.textContent = "Network error. Try again.");
+  }
+  document.getElementById('adminPassword').addEventListener('keyup', function(e){
+    if(e.key === 'Enter'){ adminLogin(); }
+  });
+  document.getElementById('adminUsername').addEventListener('keyup', function(e){
+    if(e.key === 'Enter'){ adminLogin(); }
+  });
+
+  // --- Load bookings using token, group by month ---
+  function loadBookings() {
+    const token = localStorage.getItem('chillola_admin_token');
+    if (!token) return;
+    fetch('http://localhost:3001/api/bookings', {
+      headers: { 'Authorization': 'Bearer ' + token }
+    })
+            .then(res => {
+              if (res.status === 401) throw new Error("Unauthorized");
+              return res.json();
+            })
+            .then(bookings => {
+              displayBookingsByMonth(bookings);
+            })
+            .catch(err => {
+              alert('Could not load bookings (maybe unauthorized or server error)');
+              logout();
+            });
+  }
+
+  // --- Group and render bookings by month ---
+  function displayBookingsByMonth(bookings) {
+    const container = document.getElementById('bookingsByMonth');
+    container.innerHTML = '';
+    if (bookings.length === 0) {
+      container.innerHTML = `<div style="color:#8b001b;margin-top:22px;text-align:center;">No bookings yet.</div>`;
+      return;
+    }
+    // Group by "Month Year"
+    const groups = {};
+    bookings.forEach(b => {
+      // Get "Month Year" from check-in date
+      const dateObj = new Date(b.checkin_date);
+      if (isNaN(dateObj)) return; // skip bad dates
+      const month = dateObj.toLocaleString('default', { month: 'long', year: 'numeric' });
+      if (!groups[month]) groups[month] = [];
+      groups[month].push(b);
+    });
+    Object.keys(groups).forEach(month => {
+      container.innerHTML += `
+        <h3>${month}</h3>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Full Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>Room Type</th>
+                <th>Guests</th>
+                <th class="small" style="color:white;">Booked On</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${groups[month].map(b => `
+                <tr>
+                  <td>${b.name}</td>
+                  <td>${b.phone}</td>
+                  <td>${b.email}</td>
+                  <td>${b.checkin_date}</td>
+                  <td>${b.checkout_date}</td>
+                  <td>${b.room_type}</td>
+                  <td>${b.guests}</td>
+                  <td class="small" style="color:white;">${b.created_at ? b.created_at : ''}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    });
+  }
+
+  // --- Persist login after refresh (if token) ---
+  window.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('chillola_admin_token');
+    if (token) {
+      document.getElementById('loginSection').style.display = 'none';
+      document.getElementById('dashboardSection').style.display = 'block';
+      loadBookings();
+    }
+  });
+
+  // --- Logout ---
+  function logout() {
+    localStorage.removeItem('chillola_admin_token');
+    document.getElementById('dashboardSection').style.display = 'none';
+    document.getElementById('loginSection').style.display = 'block';
+  }
+</script>
+</body>
+</html>

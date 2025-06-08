@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gallery | Chill Ola Luxury Homes & Apartment</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* GALLERY HERO STYLES */
+        .gallery-hero {
+            background: linear-gradient(90deg,#faf6f9 60%, #fff 100%);
+            padding: 70px 0 40px 0;
+            text-align: center;
+            border-bottom: 2px solid #f0e6eb;
+        }
+        .gallery-hero h1 {
+            color: #8b001b;
+            font-size: 2.9em;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            margin-bottom: 12px;
+        }
+        .gallery-hero p {
+            color: #2d2024;
+            font-size: 1.29em;
+            max-width: 900px;
+            margin: 0 auto;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-weight: 400;
+            line-height: 1.7;
+            background: rgba(255,255,255,0.83);
+            padding: 13px 24px 13px 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 18px rgba(139,0,27,0.06);
+            display: inline-block;
+        }
+
+        /* MODERN GALLERY GRID */
+        .modern-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+            padding: 0 7vw 62px 7vw;
+            background: #fff;
+        }
+        .gallery-card {
+            overflow: hidden;
+            border-radius: 17px;
+            box-shadow: 0 8px 28px rgba(139,0,27,0.08);
+            background: #faf6f9;
+            position: relative;
+            transition: box-shadow 0.16s, transform 0.17s;
+            cursor: pointer;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        .gallery-card img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            transition: transform 0.17s;
+            display: block;
+        }
+        .gallery-card:hover img {
+            transform: scale(1.3);
+        }
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(0deg, rgba(139,0,27,0.88) 78%, rgba(139,0,27,0.22) 100%);
+            color: #fff;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 1.16em;
+            padding: 13px 0 11px 0;
+            text-align: center;
+            letter-spacing: 0.04em;
+            opacity: 0.96;
+            font-weight: 600;
+            border-radius: 0 0 17px 17px;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+        @media (max-width: 700px) {
+            .modern-gallery {
+                grid-template-columns: 1fr;
+                gap: 18px;
+                padding: 0 2vw 30px 2vw;
+            }
+            .gallery-card img {
+                height: 180px;
+            }
+            .gallery-hero h1 { font-size: 2.2em;}
+            .gallery-hero p { font-size: 1.07em;}
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="header-container">
+        <div class="logo">
+            <span>CHILL OLA</span>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="gallery.html" class="active">Gallery</a>
+            <a href="booking.html">Booking</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </div>
+</header>
+<main>
+    <!-- GALLERY HERO / TITLE & FANCY INTRO -->
+    <section class="gallery-hero">
+        <h1>Our Gallery Collection</h1>
+        <p>
+            Step into your home away from home, where Luxury meets Comfort, and every detail is crafted for your relaxation.<br>
+            Our gallery invites you to explore the beautiful spaces, modern Amenities, and Serene atmosphere that make Chill Ola unique.<br>
+            Picture yourself enjoying peaceful mornings, stylish interiors, and a heartfelt welcome that feels just like Family.
+        </p>
+
+    </section>
+    <!-- MODERN GALLERY GRID -->
+    <section class="modern-gallery">
+        <div class="gallery-card">
+            <img src="image%20(2).jpeg" alt="Outdoor View">
+           <div class="gallery-caption">Outdoor View</div>
+        </div>
+        <div class="gallery-card">
+            <img src="image%20(25).jpeg" alt="Bedroom">
+            <div class="gallery-caption">Living Room</div>
+        </div>
+        <div class="gallery-card">
+            <img src="image%20(28).jpeg" alt="Bathroom">
+            <div class="gallery-caption">Celling</div>
+        </div>
+        <div class="gallery-card">
+            <img src="image%20(1).jpeg" alt="Kitchen">
+            <div class="gallery-caption">Kitchen</div>
+        </div>
+        <div class="gallery-card">
+            <img src="image%20(9).jpeg" alt="Outdoor View">
+            <div class="gallery-caption">Bedroom</div>
+        </div>
+        <div class="gallery-card">
+            <img src="image%20(10).jpeg" alt="Outdoor View">
+            <div class="gallery-caption">Outdoor View</div>
+        </div>
+        <div class="gallery-card">
+            <img src="image%20(11).jpeg" alt="Outdoor View">
+            <div class="gallery-caption">Living Room</div>
+        </div>
+        <div class="gallery-card">
+            <img src="image%20(19).jpeg" alt="Outdoor View">
+            <div class="gallery-caption">Bedroom</div>
+        </div>
+        <div class="gallery-card">
+            <img src="image%20(20).jpeg" alt="Outdoor View">
+            <div class="gallery-caption">Bedroom</div>
+        </div>
+        <div class="gallery-card">
+            <img src="image%20(4).jpeg" alt="Outdoor View">
+            <div class="gallery-caption">Bedroom</div>
+        </div>
+        <div class="gallery-card">
+            <img src="image%20(22).jpeg" alt="Outdoor View">
+            <div class="gallery-caption">Living Room</div>
+        </div>
+        <div class="gallery-card">
+            <img src="image%20(6).jpeg" alt="Outdoor View">
+            <div class="gallery-caption">Bedroom</div>
+        </div>
+        <div class="gallery-card">
+            <img src="image%20(7).jpeg" alt="Outdoor View">
+            <div class="gallery-caption">Restroom</div>
+        </div>
+
+        <div class="gallery-card">
+            <img src="image%20(27).jpeg" alt="Outdoor View">
+            <div class="gallery-caption">Bedroom</div>
+        </div>
+        <div class="gallery-card">
+            <img src="image%20(29).jpeg" alt="Outdoor View">
+            <div class="gallery-caption">Customized Towels</div>
+        </div>
+        <div class="gallery-card">
+            <img src="image%20(24).jpeg" alt="Outdoor View">
+            <div class="gallery-caption">Celling</div>
+        </div>
+
+
+        <!-- Add more images as needed -->
+    </section>
+</main>
+
+<!-- Your animated character and chatbot remain unchanged -->
+<div class="welcome-animated" id="welcomeAnimated">
+    <img src="animated.png" alt="Welcome Character" />
+</div>
+<div id="chatModal" class="chat-modal">
+    <div class="chat-header">
+        <span>Ask Chill Ola</span>
+        <button id="closeChatBtn">&times;</button>
+    </div>
+    <div class="chat-body" id="chatBody"></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
+
