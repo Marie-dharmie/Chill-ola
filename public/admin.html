@@ -159,7 +159,7 @@
     const password = document.getElementById('adminPassword').value.trim();
     const errorDiv = document.getElementById('loginError');
     errorDiv.textContent = "";
-    fetch('http://localhost:3001/api/admin/login', {
+    fetch('https://chill-olaroyalluxuryhomes.onrender.com/api/admin/login', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ username, password })
@@ -188,7 +188,7 @@
   function loadBookings() {
     const token = localStorage.getItem('chillola_admin_token');
     if (!token) return;
-    fetch('http://localhost:3001/api/bookings', {
+    fetch('https://chill-olaroyalluxuryhomes.onrender.com/api/bookings', {
       headers: { 'Authorization': 'Bearer ' + token }
     })
             .then(res => {

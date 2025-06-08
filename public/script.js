@@ -36,7 +36,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 guests: parseInt(document.getElementById('guests').value)
             };
 
-            fetch('http://localhost:3001/api/bookings', {
+            fetch('https://chill-olaroyalluxuryhomes.onrender.com/api/bookings', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
