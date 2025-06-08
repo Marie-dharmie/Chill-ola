@@ -1,17 +1,26 @@
-// server.js
-// server.js
 const express = require('express');
 const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const path = require('path'); // <-- Make sure this is here!
 
 const app = express();
-const PORT = 3001;
-const JWT_SECRET = 'VERY_SECRET_KEY_123'; // Change to a strong secret for real production!
+const PORT = process.env.PORT || 3001; // Use process.env.PORT for Render.com!
+const JWT_SECRET = 'VERY_SECRET_KEY_123';
 
 app.use(cors());
 app.use(express.json());
+
+// Serve static files from the public directory (one level up)
+app.use(express.static(path.join(__dirname, '../public')));
+
+// Optionally, serve index.html for the root route
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/index.html'));
+});
+
+
 
 const db = new sqlite3.Database('./bookings.db', (err) => {
     if (err) return console.error('Error opening database:', err.message);
@@ -41,9 +50,6 @@ db.run(`
   )
 `);
 
-app.get('/', (req, res) => {
-    res.send('Chill Ola backend is running!');
-});
 
 // ------------ BOOKINGS API (anyone can create, only admin can view) ------------
 
